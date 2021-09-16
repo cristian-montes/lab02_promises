@@ -21,12 +21,13 @@ describe('simple data structure', () => {
     const name = 'objects';
     const simpleDB = new SimpleDb(rootDir, name);
     const  data = '1234567654edfgbhytrdx';
-    console.log(simpleDB.theFile);
 
     return simpleDB
       .save(data)
       .then(() => {
-        expect(simpleDB.theFile).toEqual('test/dataDir/objects.json');
+        return simpleDB.theFile; })
+      .then((files) => {
+        expect(`./${files}`).toEqual(`${rootDir}/${name}.json`);
       });
 
   });

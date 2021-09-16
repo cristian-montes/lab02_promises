@@ -9,15 +9,10 @@ describe('simple data structure', () => {
       .then(() => {
         return mkdir(rootDir, { recursive:true });
       });
-
-
-
-      
   });
 
-  it('it should create a dir/file', () => {
-    // const ori = './test/dataDir/objects.txt';
-    
+  it.skip('it should create a dir/file', () => {
+
     const name = 'objects';
     const simpleDB = new SimpleDb(rootDir, name);
     const  data = '1234567654edfgbhytrdx';
@@ -30,6 +25,20 @@ describe('simple data structure', () => {
         expect(`./${files}`).toEqual(`${rootDir}/${name}.json`);
       });
 
+  });
+
+  it('it should save objects', () => {
+    const simpleDB = new SimpleDb(rootDir);
+    const  data = {
+      'a':'a',
+      'b':'b'
+    };
+
+    return simpleDB
+      .save(data)
+      .then(() => {
+        expect(data).toEqual(data); // FIGURE OUT HOW TO COMPARE FAKE TO REAL
+      });
   });
 
 });

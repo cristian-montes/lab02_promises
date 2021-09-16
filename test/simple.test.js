@@ -30,8 +30,8 @@ describe('simple data structure', () => {
   it('it should save objects', () => {
     const simpleDB = new SimpleDb(rootDir);
     const  data = {
-      'a':'a',
-      'b':'b'
+      a:'a',
+      b:'b'
     };
 
     return simpleDB

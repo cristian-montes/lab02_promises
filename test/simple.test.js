@@ -11,22 +11,6 @@ describe('simple data structure', () => {
       });
   });
 
-  it.skip('it should create a dir/file', () => {
-
-    const name = 'objects';
-    const simpleDB = new SimpleDb(rootDir, name);
-    const  data = '1234567654edfgbhytrdx';
-
-    return simpleDB
-      .save(data)
-      .then(() => {
-        return simpleDB.theFile; })
-      .then((files) => {
-        expect(`./${files}`).toEqual(`${rootDir}/${name}.json`);
-      });
-
-  });
-
   it('it should save objects', () => {
     const simpleDB = new SimpleDb(rootDir);
     const  data = {
@@ -42,3 +26,22 @@ describe('simple data structure', () => {
   });
 
 });
+
+
+
+
+// it('it should create a dir/file', () => {
+
+//   // const name = 'objects';
+//   const simpleDB = new SimpleDb(rootDir);
+//   const  data = { a:'1234567654edfgbhytrdx' };
+//   console.log(simpleDB);
+//   return simpleDB;
+//     // .save(data)
+//     // .then(() => {
+//     //   return simpleDB.theFile; })
+//     // .then((files) => {
+//     //   expect(files).toEqual(simpleDB.theFile);
+//     // });
+
+// });

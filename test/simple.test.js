@@ -1,4 +1,5 @@
 import { rm, mkdir } from 'fs/promises';
+import { get } from 'http';
 import { SimpleDb } from '../simple-db.js';
 
 describe('simple data structure', () => {
@@ -13,6 +14,7 @@ describe('simple data structure', () => {
 
   it('it should save objects', () => {
     const simpleDB = new SimpleDb(rootDir);
+
     const  data = {
       a:'a',
       b:'b'
@@ -21,27 +23,26 @@ describe('simple data structure', () => {
     return simpleDB
       .save(data)
       .then(() => {
-        expect(data).toEqual(data); // FIGURE OUT HOW TO COMPARE FAKE TO REAL
+        expect(data.id).toEqual(expect.any(String)); // FIGURE OUT HOW TO COMPARE FAKE TO REAL
       });
   });
 
+  it('it gets objects by id', () => {
+    const simpleDB = new SimpleDb(rootDir);
+
+    const  data = {
+      a:'a',
+      b:'b'
+    };
+
+    return simpleDB
+      .save(data).then(() => { 
+        return simpleDB.get().then((result) => {
+          expect(result).toEqual({ a:'a',
+            b:'b', 
+            id: expect.any(String)
+          });
+        });
+      });
+  });
 });
-
-
-
-
-// it('it should create a dir/file', () => {
-
-//   // const name = 'objects';
-//   const simpleDB = new SimpleDb(rootDir);
-//   const  data = { a:'1234567654edfgbhytrdx' };
-//   console.log(simpleDB);
-//   return simpleDB;
-//     // .save(data)
-//     // .then(() => {
-//     //   return simpleDB.theFile; })
-//     // .then((files) => {
-//     //   expect(files).toEqual(simpleDB.theFile);
-//     // });
-
-// });

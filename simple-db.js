@@ -13,9 +13,20 @@ export class SimpleDb {
   save(obj){
     obj['id'] = this.NamId;
     const stringData = JSON.stringify(obj);
-    return writeFile(this.theFile, stringData);
+    return writeFile(this.theFile, stringData).then(() => {
+      return this.NamId;
+    });
+
   }
+
+  get(){
+    return readFile(this.theFile, 'utf-8').then((result) => {
+      return JSON.parse(result);
+    }).catch(() => {
+      return null;
+    });
   
+  }
 
 
   leelo() {

@@ -5,14 +5,10 @@ import shortid from 'shortid';
 export class SimpleDb {
 
   constructor(rootDir){
-    // this.NamId = shortid.generate();
-    // const fileName = `${this.NamId}.json`;
-    // this.theFile = path.join(rootDir, fileName);
     this.path = rootDir;
   }
 
   // ------------------------------------------------//
-
   save(obj){
     const randomID = shortid.generate();
     const fileName = `${randomID}.json`;
@@ -24,7 +20,6 @@ export class SimpleDb {
     return writeFile(toFile, stringData).then(() => {
       return randomID;
     });
-
   }
 
   // ------------------------------------------------//

@@ -2,7 +2,7 @@ import { rm, mkdir } from 'fs/promises';
 import { SimpleDb } from '../simple-db.js';
 
 describe('simple data structure', () => {
-  const rootDir = './test/dataDir';
+  const rootDir = '../__tests__/dataDir';
 
   beforeEach(() => {
     return rm(rootDir, { force:true, recursive:true })

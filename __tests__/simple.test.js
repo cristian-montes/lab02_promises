@@ -2,7 +2,7 @@ import { rm, mkdir } from 'fs/promises';
 import { SimpleDb } from '../simple-db.js';
 
 describe('simple data structure', () => {
-  const rootDir = './__tests__/dataDir';
+  const rootDir = '../__tests__/dataDir';
 
   beforeEach(() => {
     return rm(rootDir, { force:true, recursive:true })
@@ -47,7 +47,7 @@ describe('simple data structure', () => {
   
   // 3------------------------------------------------//
 
-  it.skip('it gets objects by id null', () => {
+  it('it gets objects by id null', () => {
     const simpleDB = new SimpleDb(rootDir);
 
     const  data = {

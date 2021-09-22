@@ -24,13 +24,18 @@ export class SimpleDb {
 
   // ------------------------------------------------//
   get(id){
-    const fileName = `${id}.json`;
-    const toFile = path.join(this.path, fileName);
-    return readFile(toFile, 'utf-8').then((result) => {
-      return JSON.parse(result);
-    }).catch(() => {
-      return null;
-    });
+    const fileName = `/${id}.json`;
+
+    try{
+      const toFile = path.join(this.path, fileName);
+      return readFile(toFile, 'utf-8').then((result) => {
+        return JSON.parse(result);
+      });
+    } catch(error){
+      if(error.code === 'ENOENT') return null;
+      throw error;
+
+    }
   
   }
   // ------------------------------------------------//
@@ -50,7 +55,7 @@ export class SimpleDb {
 
   // ------------------------------------------------//
   remove(id){
-    const toFile = path.join(this.path, `${id}.json`);
+    const toFile = path.join(this.path, `/${id}.json`);
     return rm(toFile, { force:true, recursive:true }).then(() => {
       return id;
     });

@@ -47,23 +47,23 @@ describe('simple data structure', () => {
   
   // 3------------------------------------------------//
 
-  it('it gets objects by id null', () => {
-    const simpleDB = new SimpleDb(rootDir);
+  // it('it gets objects by id null', () => {
+  //   const simpleDB = new SimpleDb(rootDir);
 
-    const  data = {
-      a:'a',
-      b:'b'
-    };
+  //   const  data = {
+  //     a:'a',
+  //     b:'b'
+  //   };
     
 
-    return simpleDB
-      .save(data).then(() => { 
-        // console.log(data);
-        return simpleDB.get().then((result) => {
-          expect(result).toBeNull();
-        });
-      });
-  });
+  //   return simpleDB
+  //     .save(data).then(() => { 
+  //       // console.log(data);
+  //       return simpleDB.get().then((result) => {
+  //         expect(result).toBeNull();
+  //       });
+  //     });
+  // });
 
 
 

@@ -5,14 +5,10 @@ import shortid from 'shortid';
 export class SimpleDb {
 
   constructor(rootDir){
-    // this.NamId = shortid.generate();
-    // const fileName = `${this.NamId}.json`;
-    // this.theFile = path.join(rootDir, fileName);
     this.path = rootDir;
   }
 
   // ------------------------------------------------//
-
   save(obj){
     const randomID = shortid.generate();
     const fileName = `${randomID}.json`;
@@ -24,18 +20,21 @@ export class SimpleDb {
     return writeFile(toFile, stringData).then(() => {
       return randomID;
     });
-
   }
 
   // ------------------------------------------------//
   get(id){
-    const fileName = `${id}.json`;
+    const fileName = `/${id}.json`;
+
     const toFile = path.join(this.path, fileName);
-    return readFile(toFile, 'utf-8').then((result) => {
-      return JSON.parse(result);
-    }).catch(() => {
-      return null;
-    });
+    return readFile(toFile, 'utf-8')
+      .then((result) => {
+        return JSON.parse(result);
+      })
+      .catch((error) => {
+        if(error.code === 'ENOENT') return null;
+        throw error;
+      });
   
   }
   // ------------------------------------------------//
@@ -55,7 +54,7 @@ export class SimpleDb {
 
   // ------------------------------------------------//
   remove(id){
-    const toFile = path.join(this.path, `${id}.json`);
+    const toFile = path.join(this.path, `/${id}.json`);
     return rm(toFile, { force:true, recursive:true }).then(() => {
       return id;
     });
@@ -63,20 +62,20 @@ export class SimpleDb {
   // ------------------------------------------------//
 
 
-  update(id, teddy){
-    const toFile = path.join(this.path, `${id}.json`);
+  // update(id, teddy){
+  //   const toFile = path.join(this.path, `${id}.json`);
 
-    return Promise.all(
-      this.get(id).then((obj) => {
-        obj.a = teddy;
-        return writeFile(toFile, JSON.stringify(obj)).then(() => {
-          // console.log(obj);
-          return obj;
-        });
-      })
-    );
+  //   return Promise.all(
+  //     this.get(id).then((obj) => {
+  //       obj.a = teddy;
+  //       return writeFile(toFile, JSON.stringify(obj)).then(() => {
+  //         // console.log(obj);
+  //         return obj;
+  //       });
+  //     })
+  //   );
    
-  }
+  // }
 
   // ------------------------------------------------//
 } 

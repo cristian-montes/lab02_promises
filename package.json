@@ -2,12 +2,12 @@
   "name": "lab02-promises",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "simple-db.js",
   "type": "module",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --verbose --runInBand --testLocationInResults",
     "test:watch": "npm run test -- --watch",
-    "start": "node index.js",
+    "start": "node simple-db.js",
     "start:watch": "nodemon index.js"
   },
   "jest": {

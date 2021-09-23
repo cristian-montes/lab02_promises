@@ -26,16 +26,15 @@ export class SimpleDb {
   get(id){
     const fileName = `/${id}.json`;
 
-    try{
-      const toFile = path.join(this.path, fileName);
-      return readFile(toFile, 'utf-8').then((result) => {
+    const toFile = path.join(this.path, fileName);
+    return readFile(toFile, 'utf-8')
+      .then((result) => {
         return JSON.parse(result);
+      })
+      .catch((error) => {
+        if(error.code === 'ENOENT') return null;
+        throw error;
       });
-    } catch(error){
-      if(error.code === 'ENOENT') return null;
-      throw error;
-
-    }
   
   }
   // ------------------------------------------------//
@@ -63,20 +62,20 @@ export class SimpleDb {
   // ------------------------------------------------//
 
 
-  update(id, teddy){
-    const toFile = path.join(this.path, `${id}.json`);
+  // update(id, teddy){
+  //   const toFile = path.join(this.path, `${id}.json`);
 
-    return Promise.all(
-      this.get(id).then((obj) => {
-        obj.a = teddy;
-        return writeFile(toFile, JSON.stringify(obj)).then(() => {
-          // console.log(obj);
-          return obj;
-        });
-      })
-    );
+  //   return Promise.all(
+  //     this.get(id).then((obj) => {
+  //       obj.a = teddy;
+  //       return writeFile(toFile, JSON.stringify(obj)).then(() => {
+  //         // console.log(obj);
+  //         return obj;
+  //       });
+  //     })
+  //   );
    
-  }
+  // }
 
   // ------------------------------------------------//
 } 
